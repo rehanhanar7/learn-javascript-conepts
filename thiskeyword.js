@@ -1,5 +1,5 @@
 /** RUN IN RUNJS only */
-
+console.log('this keyword')
 var a = 'global';
 
 function normalFunction(){
@@ -14,19 +14,19 @@ console.log("normalFunction", normalFunction()); // undefined (there is no a var
 obj1 = {
   a: 'obj1',
   b : 15,
-  geta : function(){
-    console.log('am called 2', this.a);
+  geta : function(whereamcalled){
+    console.log(whereamcalled + ' am called 2', this.a);
   }
 }
 
-obj1.geta(); // am called 2 obj1
+obj1.geta('in global object'); // am called 2 obj1
 
 var getafn = obj1.geta; 
 
-getafn(); // am called 2 global (since global object is calling the function)
+getafn('in global object am called'); // am called 2 global (since global object is calling the function)
 
 obj2 = {a: 'obj2', b: 20, getafn}; // 'am called 2' 'obj2' & object
 
-obj2.getafn(); // am called 2 'obj2'
+obj2.getafn('in global object am called here'); // am called 2 'obj2'
 
-console.log(obj2.getafn()); // undefined
+console.log(obj2.getafn('in console object am called here')); // undefined
